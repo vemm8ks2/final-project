@@ -1,6 +1,5 @@
 package com.vemm8ks2.model;
 
-import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +16,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderItem {
+public class CartItem {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +24,7 @@ public class OrderItem {
 
   @JsonIgnore
   @ManyToOne
-  private Order order;
+  private Cart cart;
 
   @ManyToOne
   private Product product;
@@ -39,7 +38,4 @@ public class OrderItem {
   private Integer discountPrice;
 
   private Long userId;
-
-  private LocalDateTime deliveryDate;
-
 }

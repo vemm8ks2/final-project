@@ -7,7 +7,7 @@ import com.vemm8ks2.model.Order;
 import com.vemm8ks2.model.User;
 
 public interface OrderService {
-  
+
   public Order createOrder(User user, Address shippingAddress);
 
   public Order findOrderById(Long orderId) throws OrderException;
