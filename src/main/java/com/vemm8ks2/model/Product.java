@@ -41,14 +41,17 @@ public class Product {
   @Column(name = "discounted_price")
   private int discountPrice;
   
-  @Column(name = "discount_persent")
-  private int discountPersent;
+  @Column(name = "discount_percent")
+  private int discountPercent;
   
   @Column(name = "quantity")
   private int quantity;
   
   @Column(name = "brand")
   private String brand;
+  
+  @Column(name = "color")
+  private String color;
   
   @Embedded
   @ElementCollection
