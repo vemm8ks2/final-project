@@ -21,14 +21,14 @@ public class JwtProvider {
 
     return jwt;
   }
-  
+
   public String getEmailFromToken(String jwt) {
-    
+
     jwt = jwt.substring(7);
-    
+
     Claims claims = Jwts.parser().verifyWith(key).build().parseSignedClaims(jwt).getPayload();
     String email = String.valueOf(claims.get("email"));
-    
+
     return email;
   }
 }
