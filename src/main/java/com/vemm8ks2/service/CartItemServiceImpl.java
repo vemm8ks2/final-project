@@ -1,6 +1,9 @@
 package com.vemm8ks2.service;
 
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
 import com.vemm8ks2.exception.CartItemException;
 import com.vemm8ks2.exception.UserException;
 import com.vemm8ks2.model.Cart;
@@ -10,6 +13,7 @@ import com.vemm8ks2.model.User;
 import com.vemm8ks2.repository.CartItemRepository;
 import lombok.RequiredArgsConstructor;
 
+@Service
 @RequiredArgsConstructor
 public class CartItemServiceImpl implements CartItemService {
 
