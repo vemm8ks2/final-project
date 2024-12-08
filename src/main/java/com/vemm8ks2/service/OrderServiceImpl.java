@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 public class OrderServiceImpl implements OrderService {
 
   private final CartRepository cartRepository;
-  private final CartService cartItemService;
+  private final CartItemService cartItemService;
   private final ProductService productService;
 
   @Override
