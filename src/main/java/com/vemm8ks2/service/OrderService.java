@@ -20,7 +20,7 @@ public interface OrderService {
 
   public Order shippedOrder(Long orderId) throws OrderException;
 
-  public Order deliveredOrder(Long irderId) throws OrderException;
+  public Order deliveredOrder(Long orderId) throws OrderException;
 
   public Order cancledOrder(Long orderId) throws OrderException;
 

@@ -29,7 +29,7 @@ public class OrderController {
   private final OrderService orderService;
   private final UserService userService;
 
-  @PostMapping("/")
+  @PostMapping
   public ResponseEntity<Order> createOrder(@RequestBody Address shippingAddress,
       @RequestHeader("Authorization") String jwt) throws UserException {
 
