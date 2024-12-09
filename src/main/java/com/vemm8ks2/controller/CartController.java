@@ -26,7 +26,7 @@ public class CartController {
   private final CartService cartService;
   private final UserService userService;
 
-  @GetMapping("/")
+  @GetMapping
   public ResponseEntity<Cart> findUserCart(@RequestHeader("Authorization") String jwt)
       throws UserException {
 

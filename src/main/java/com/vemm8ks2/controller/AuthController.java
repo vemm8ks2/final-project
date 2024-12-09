@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vemm8ks2.config.JwtProvider;
 import com.vemm8ks2.exception.UserException;
+import com.vemm8ks2.model.Cart;
 import com.vemm8ks2.model.User;
 import com.vemm8ks2.repository.UserRepository;
 import com.vemm8ks2.request.LoginRequest;
 import com.vemm8ks2.response.AuthResponse;
+import com.vemm8ks2.service.CartService;
 import com.vemm8ks2.service.CustomUserServiceImpl;
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +32,7 @@ public class AuthController {
   private final JwtProvider jwtProvider;
   private final PasswordEncoder passwordEncoder;
   private final CustomUserServiceImpl customUserServiceImpl;
+  private final CartService cartService;
 
   @PostMapping("/signup")
   public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user)
@@ -54,6 +57,9 @@ public class AuthController {
     createdUser.setLastName(lastName);
 
     User savedUser = userRepository.save(createdUser);
+    
+    @SuppressWarnings("unused")
+    Cart cart = cartService.createCart(savedUser);
 
     Authentication authentication =
         new UsernamePasswordAuthenticationToken(savedUser.getEmail(), savedUser.getPassword());
@@ -96,4 +102,5 @@ public class AuthController {
 
     return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
   }
+  
 }

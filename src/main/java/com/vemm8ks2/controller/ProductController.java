@@ -23,12 +23,13 @@ public class ProductController {
 
   private final ProductService productService;
 
-  @GetMapping("/")
-  public ResponseEntity<Page<Product>> findProductByCategoryHandler(@RequestParam String category,
-      @RequestParam List<String> colors, @RequestParam List<String> sizes,
-      @RequestParam Integer minPrice, @RequestParam Integer maxPrice,
-      @RequestParam Integer minDiscount, @RequestParam String sort, @RequestParam String stock,
-      @RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+  @GetMapping
+  public ResponseEntity<Page<Product>> findProductByCategoryHandler(
+      @RequestParam("category") String category, @RequestParam("colors") List<String> colors,
+      @RequestParam("sizes") List<String> sizes, @RequestParam("minPrice") Integer minPrice,
+      @RequestParam("maxPrice") Integer maxPrice, @RequestParam("minDiscount") Integer minDiscount,
+      @RequestParam("sort") String sort, @RequestParam("stock") String stock,
+      @RequestParam("pageNumber") Integer pageNumber, @RequestParam("pageSize") Integer pageSize) {
 
     Page<Product> result = productService.getAllProduct(category, colors, sizes, minPrice, maxPrice,
         minDiscount, sort, stock, pageNumber, pageSize);
@@ -39,7 +40,7 @@ public class ProductController {
   }
 
   @GetMapping("/id/{productId}")
-  public ResponseEntity<Product> findProductByIdHandler(@PathVariable Long productId)
+  public ResponseEntity<Product> findProductByIdHandler(@PathVariable("productId") Long productId)
       throws ProductException {
 
     Product product = productService.findProductById(productId);

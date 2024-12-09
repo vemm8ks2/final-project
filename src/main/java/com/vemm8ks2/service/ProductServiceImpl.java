@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
     if (topLevel == null) {
       Category topLevelCategory = new Category();
 
-      topLevelCategory.setName(req.getThirdLevelCategory());
+      topLevelCategory.setName(req.getTopLevelCategory());
       topLevelCategory.setLevel(1);
 
       topLevel = categoryRepository.save(topLevelCategory);
@@ -70,7 +70,7 @@ public class ProductServiceImpl implements ProductService {
     product.setTitle(req.getTitle());
     product.setColor(req.getColor());
     product.setDescription(req.getDescription());
-    product.setDiscountPrice(req.getDiscountedPrice());
+    product.setDiscountPrice(req.getDiscountPrice());
     product.setDiscountPercent(req.getDiscountPercent());
     product.setImageUrl(req.getImageUrl());
     product.setBrand(req.getBrand());
@@ -105,7 +105,7 @@ public class ProductServiceImpl implements ProductService {
 
     return productRepository.save(product);
   }
-  
+
   @Override
   public List<Product> findAllProducts() {
     return productRepository.findAll();
