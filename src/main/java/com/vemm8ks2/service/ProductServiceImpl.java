@@ -105,6 +105,11 @@ public class ProductServiceImpl implements ProductService {
 
     return productRepository.save(product);
   }
+  
+  @Override
+  public List<Product> findAllProducts() {
+    return productRepository.findAll();
+  }
 
   @Override
   public Product findProductById(Long id) throws ProductException {
