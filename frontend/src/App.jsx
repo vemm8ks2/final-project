@@ -1,5 +1,5 @@
-import Navigation from './customer/components/Navigation/Navigation';
-import HomePage from './customer/components/Pages/HomePage/HomePage';
+import Navigation from '@/customer/components/Navigation/Navigation';
+import HomePage from '@/customer/Pages/HomePage/HomePage';
 
 function App() {
   return (
