@@ -46,6 +46,6 @@ public class ProductController {
 
     log.info("|| --- findProductByIdHandler");
 
-    return new ResponseEntity<Product>(product, HttpStatus.ACCEPTED);
+    return new ResponseEntity<>(product, HttpStatus.ACCEPTED);
   }
 }
