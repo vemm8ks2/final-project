@@ -1,8 +1,23 @@
+// @ts-nocheck
+import { getUser, register } from '@/state/auth/Action';
+import { initState } from '@/state/auth/Reducer';
 import { Button, Grid2 as Grid, TextField } from '@mui/material';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { auth } = useSelector((store) => store);
+
+  const jwt = localStorage.getItem('jwt');
+
+  useEffect(() => {
+    if (jwt) {
+      dispatch(getUser(jwt));
+    }
+  }, [jwt]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,6 +28,8 @@ const RegisterForm = () => {
     const lastName = data.get('lastName');
     const email = data.get('email');
     const password = data.get('password');
+
+    dispatch(register({ firstName, lastName, email, password }));
   };
 
   return (

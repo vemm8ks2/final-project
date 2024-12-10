@@ -1,7 +1,6 @@
 import { authReducer } from '@/state/auth/Reducer';
-
-const { legacy_createStore, applyMiddleware, combineReducers } = require('redux');
-const { thunk } = require('redux-thunk');
+import { applyMiddleware, combineReducers, legacy_createStore } from 'redux';
+import { thunk } from 'redux-thunk';
 
 const rootReducers = combineReducers({
   auth: authReducer,

@@ -11,7 +11,7 @@ import {
   REGISTER_SUCCESS,
 } from '@/state/auth/ActionType';
 
-const initState = { user: null, isLoading: false, error: null, jwt: null };
+export const initState = { user: null, isLoading: false, error: null, jwt: null };
 
 export const authReducer = (state = initState, action) => {
   switch (action.type) {

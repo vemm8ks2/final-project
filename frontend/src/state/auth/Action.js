@@ -28,6 +28,8 @@ export const register = (userData) => async (dispatch) => {
       localStorage.setItem('jwt', user.jwt);
     }
 
+    console.log(user);
+
     dispatch(registerSuccess(user.jwt));
   } catch (e) {
     dispatch(registerFailure(e.message));
@@ -49,6 +51,8 @@ export const login = (userData) => async (dispatch) => {
       localStorage.setItem('jwt', user.jwt);
     }
 
+    console.log(user);
+
     dispatch(loginSuccess(user.jwt));
   } catch (e) {
     dispatch(loginFailure(e.message));
@@ -60,14 +64,16 @@ const getUserRequest = () => ({ type: GET_USER_REQUEST });
 const getUserSuccess = (user) => ({ type: GET_USER_SUCCESS, payload: user });
 const getUserFailure = (error) => ({ type: GET_USER_FAILURE, payload: error });
 
-export const getUser = () => async (dispatch) => {
+export const getUser = (jwt) => async (dispatch) => {
   dispatch(getUserRequest());
 
   try {
     const res = await axios.get(`${API_BASE_URL}/api/users/profile`, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${jwt}` },
     });
     const user = res.data;
+
+    console.log(user);
 
     dispatch(getUserSuccess(user));
   } catch (e) {
@@ -77,4 +83,5 @@ export const getUser = () => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT, payload: null });
+  localStorage.clear();
 };
