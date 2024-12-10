@@ -24,6 +24,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { Avatar, Button, Menu, MenuItem } from '@mui/material';
 import { deepPurple } from '@mui/material/colors';
+import AuthModal from '@/customer/auth/AuthModal';
 
 const navigation = {
   categories: [
@@ -484,7 +485,7 @@ export default function Navigation() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  {true ? (
+                  {false ? (
                     <div>
                       <Avatar
                         className="text-white"
@@ -565,6 +566,8 @@ export default function Navigation() {
           </div>
         </nav>
       </header>
+
+      <AuthModal handleClose={handleClose} open={openAuthModal} />
     </div>
   );
 }

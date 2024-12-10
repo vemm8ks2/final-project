@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import CustomerRouters from './Routes/CustomerRouters';
+import CustomerRouters from './routes/CustomerRouters';
 
 function App() {
   return (
