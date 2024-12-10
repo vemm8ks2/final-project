@@ -1,13 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
+
   return (
-    <div className="w-[15rem] m-3 transition-all cursor-pointer hover:shadow-lg">
+    <div
+      onClick={() => navigate(`/product/${5}`)}
+      className="w-[15rem] m-3 transition-all cursor-pointer hover:shadow-lg"
+    >
       <div className="h-[20rem]">
-        <img
-          //src="https://picsum.photos/612/612"
-          src={product.imageUrl}
-          alt=""
-          className="w-full h-full object-cover object-left-top"
-        />
+        <img src={product.imageUrl} alt="" className="w-full h-full object-cover object-left-top" />
       </div>
       <div className="bg-white p-3">
         <div>
