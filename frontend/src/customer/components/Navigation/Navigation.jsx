@@ -166,6 +166,8 @@ export default function Navigation() {
   const dispatch = useDispatch();
   const { auth } = useSelector((store) => store);
 
+  console.log(auth);
+
   const [open, setOpen] = useState(false);
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -182,7 +184,7 @@ export default function Navigation() {
     if (location.pathname === '/login' || location.pathname === '/register') {
       navigate(-1);
     }
-  }, [auth.user, location.pathname]);
+  }, [auth.user]);
 
   const handleUserClick = (event) => {
     setAnchorEl(event.currentTarget);

@@ -1,7 +1,11 @@
+// @ts-nocheck
+import { login } from '@/state/auth/Action';
 import { Button, Grid2 as Grid, TextField } from '@mui/material';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -11,6 +15,8 @@ const LoginForm = () => {
 
     const email = data.get('email');
     const password = data.get('password');
+
+    dispatch(login({ email, password }));
   };
 
   return (
