@@ -5,11 +5,11 @@ import {
   UPDATE_PAYMENT_REQUEST,
 } from './ActionType';
 
-export const createPayment = (req) => async (dispatch) => {
+export const createPayment = (orderId) => async (dispatch) => {
   dispatch({ type: CREATE_PAYMENT_REQUEST });
 
   try {
-    const { data } = await api.post(`/api/payments/${req.orderId}`, req);
+    const { data } = await api.post(`/api/payments/${orderId}`, {});
 
     if (data.payment_link_url) {
       location.href = data.payment_link_url;
@@ -24,7 +24,7 @@ export const updatePayment = (req) => async (dispatch) => {
 
   try {
     const { data } = await api.get(
-      `/api/payments?payment_id=${req.orderId}&order_id=${req.orderId}`
+      `/api/payments?payment_id=${req.paymentId}&order_id=${req.orderId}`
     );
 
     console.log('update payment : ', data);

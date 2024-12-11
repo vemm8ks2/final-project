@@ -2,10 +2,12 @@ package com.vemm8ks2.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import com.vemm8ks2.exception.OrderException;
 import com.vemm8ks2.model.Order;
 import com.vemm8ks2.repository.OrderRepository;
@@ -15,6 +17,7 @@ import com.vemm8ks2.service.OrderService;
 import com.vemm8ks2.service.UserService;
 import lombok.RequiredArgsConstructor;
 
+@RestController
 @RequiredArgsConstructor
 public class PaymentController {
 
@@ -53,6 +56,7 @@ public class PaymentController {
     return null;
   }
 
+  @GetMapping("/payments")
   public ResponseEntity<ApiResponse> redirect(@RequestParam(name = "payment_id") String paymentId,
       @RequestParam(name = "order_id") Long orderId) throws OrderException {
 
