@@ -2,6 +2,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Dialog,
   DialogBackdrop,
@@ -22,15 +24,21 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from '@heroicons/react/20/solid';
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Pagination,
+  Radio,
+  RadioGroup,
+} from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
-import ProductCard from './ProductCard';
+
+import ProductCard from '@/customer/components/Product/ProductCard';
+import { findProducts } from '@/state/product/Action';
 
 import { O7G44i } from '@/data/O7G44i';
 import xkGXa5 from '@/data/xkGXa5';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { findProducts } from '@/state/product/Action';
 
 const filters = xkGXa5['xkGXa5.filters'];
 const singleFilter = xkGXa5['xkGXa5.singleFilter'];
@@ -95,6 +103,14 @@ export default function Product() {
     navigate({ search: `?${query}` });
   };
 
+  const handlePagination = (_, value) => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set('page', value);
+
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` });
+  };
+
   useEffect(() => {
     const [minPrice, maxPrice] = price === null ? [0, 10000] : price.split('-').map(Number);
 
@@ -105,7 +121,7 @@ export default function Product() {
       minDiscount: discount || 0,
       sort: sort || 'price_low',
       pageNumber: pageNumber - 1,
-      pageSize: 10,
+      pageSize: 1,
       minPrice,
       maxPrice,
       stock,
@@ -410,6 +426,16 @@ export default function Product() {
                   ))}
                 </div>
               </div>
+            </div>
+          </section>
+
+          <section className="w-full px-[3.6rem]">
+            <div className="px-4 py-5 flex justify-center">
+              <Pagination
+                count={product.products?.totalPages}
+                color="primary"
+                onChange={handlePagination}
+              />
             </div>
           </section>
         </main>
