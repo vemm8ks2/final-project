@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { removeCartItem, updateCartItem } from '@/state/cart/Action';
 
 const CartItem = ({ item }) => {
+  console.log(item);
+
   const dispatch = useDispatch();
 
   const handleUpdate = (num) => {
@@ -34,9 +36,9 @@ const CartItem = ({ item }) => {
           </p>
           <p className="opacity-70 mt-2">Seller: {item.product.brand}</p>
           <div className="flex space-x-5 items-center text-gray-900 pt-6">
-            <p className="font-semibold">${item.price}</p>
-            <p className="opacity-50 line-through">${item.discountPrice}</p>
-            <p className="text-green-600 font-semibold">{item.discountPercent}% off</p>
+            <p className="font-semibold">${item.discountPrice}</p>
+            <p className="opacity-50 line-through">${item.price}</p>
+            <p className="text-green-600 font-semibold">{item.product.discountPercent}% off</p>
           </div>
         </div>
       </div>

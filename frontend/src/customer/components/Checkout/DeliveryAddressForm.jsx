@@ -1,7 +1,14 @@
+// @ts-nocheck
 import { Box, Button, Grid2 as Grid, TextField } from '@mui/material';
 import AddressCard from '../AddressCard/AddressCard';
+import { useDispatch } from 'react-redux';
+import { createOrder } from '@/state/order/Action';
+import { useNavigate } from 'react-router-dom';
 
 const DeliveryAddressForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -14,6 +21,21 @@ const DeliveryAddressForm = () => {
     const state = data.get('state');
     const zipCode = data.get('zip');
     const mobile = data.get('phoneNumber');
+
+    const orderData = {
+      address: {
+        firstName,
+        lastName,
+        streetAddress,
+        city,
+        state,
+        zipCode,
+        mobile,
+      },
+      navigate,
+    };
+
+    dispatch(createOrder(orderData));
   };
 
   return (
@@ -59,7 +81,7 @@ const DeliveryAddressForm = () => {
                     required
                     id="address"
                     name="address"
-                    label="Address"
+                    label="Street address"
                     fullWidth
                     autoComplete="given-name"
                     multiline
@@ -107,7 +129,7 @@ const DeliveryAddressForm = () => {
                   />
                 </Grid>
                 <Grid size={{ xs: 12, sm: 6 }}>
-                  <Button size="large" variant="contained" sx={{ py: 1.5, mt: 2 }}>
+                  <Button type="submit" size="large" variant="contained" sx={{ py: 1.5, mt: 2 }}>
                     Deliver here
                   </Button>
                 </Grid>
