@@ -1,6 +1,7 @@
+// @ts-nocheck
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogBackdrop,
@@ -27,7 +28,9 @@ import ProductCard from './ProductCard';
 
 import { O7G44i } from '@/data/O7G44i';
 import xkGXa5 from '@/data/xkGXa5';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { findProducts } from '@/state/product/Action';
 
 const filters = xkGXa5['xkGXa5.filters'];
 const singleFilter = xkGXa5['xkGXa5.singleFilter'];
@@ -42,9 +45,23 @@ function classNames(...classes) {
 }
 
 export default function Product() {
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const param = useParams();
+  const dispatch = useDispatch();
+
+  const { product } = useSelector((store) => store);
+
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  const searchParams = new URLSearchParams(decodeURIComponent(location.search));
+  const color = searchParams.get('color');
+  const size = searchParams.get('size');
+  const price = searchParams.get('price');
+  const discount = searchParams.get('discount');
+  const sort = searchParams.get('sort');
+  const pageNumber = Number(searchParams.get('page')) || 1;
+  const stock = searchParams.get('stock');
 
   const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search);
@@ -77,6 +94,25 @@ export default function Product() {
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
+
+  useEffect(() => {
+    const [minPrice, maxPrice] = price === null ? [0, 10000] : price.split('-').map(Number);
+
+    const data = {
+      category: param.levelThree,
+      colors: color || [],
+      sizes: size || [],
+      minDiscount: discount || 0,
+      sort: sort || 'price_low',
+      pageNumber: pageNumber - 1,
+      pageSize: 10,
+      minPrice,
+      maxPrice,
+      stock,
+    };
+
+    dispatch(findProducts(data));
+  }, [param.levelThree, color, size, price, discount, sort, pageNumber, stock]);
 
   return (
     <div className="bg-white">
@@ -369,7 +405,7 @@ export default function Product() {
               {/* Product grid */}
               <div className="lg:col-span-4">
                 <div className="flex flex-wrap justify-center bg-white py-5">
-                  {O7G44i.map((item, i) => (
+                  {product.products?.content?.map((item, i) => (
                     <ProductCard key={i} product={item} />
                   ))}
                 </div>

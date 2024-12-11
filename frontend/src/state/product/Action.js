@@ -26,8 +26,10 @@ export const findProducts = (req) => async (dispatch) => {
 
   try {
     const { data } = await api.get(
-      `/api/products/colors=${colors}&sizes=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+      `/api/products?colors=${colors}&sizes=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     );
+
+    console.log(data);
 
     dispatch({ type: FIND_PRODUCTS_SUCCESS, payload: data });
   } catch (e) {
