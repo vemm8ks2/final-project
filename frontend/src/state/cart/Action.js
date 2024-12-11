@@ -19,6 +19,7 @@ export const getCart = () => async (dispatch) => {
 
   try {
     const { data } = await api.get('/api/cart');
+    console.log(data);
 
     dispatch({ type: GET_CART_SUCCESS, payload: data });
   } catch (e) {
@@ -30,7 +31,8 @@ export const addItemToCart = (req) => async (dispatch) => {
   dispatch({ type: ADD_ITEM_TO_CART_REQUEST });
 
   try {
-    const { data } = await api.put('/api/cart/add', req.data);
+    const { data } = await api.put('/api/cart/add', req);
+    console.log(data);
 
     dispatch({ type: ADD_ITEM_TO_CART_SUCCESS, payload: data });
   } catch (e) {
@@ -38,13 +40,13 @@ export const addItemToCart = (req) => async (dispatch) => {
   }
 };
 
-export const removeCartItem = (req) => async (dispatch) => {
+export const removeCartItem = (cartItemId) => async (dispatch) => {
   dispatch({ type: REMOVE_CART_ITEM_REQUEST });
 
   try {
-    const { data } = await api.delete(`/api/cart_items/${req.cartItemId}`);
+    await api.delete(`/api/cart-items/${cartItemId}`);
 
-    dispatch({ type: REMOVE_CART_ITEM_SUCCESS, payload: data });
+    dispatch({ type: REMOVE_CART_ITEM_SUCCESS, payload: cartItemId });
   } catch (e) {
     dispatch({ type: REMOVE_CART_ITEM_FAILURE, payload: e.message });
   }
@@ -54,7 +56,7 @@ export const updateCartItem = (req) => async (dispatch) => {
   dispatch({ type: UPDATE_CART_ITEM_REQUEST });
 
   try {
-    const { data } = await api.put(`/api/cart_items/${req.cartItemId}`, req.data);
+    const { data } = await api.put(`/api/cart-items/${req.cartItemId}`, req.data);
 
     dispatch({ type: UPDATE_CART_ITEM_SUCCESS, payload: data });
   } catch (e) {
