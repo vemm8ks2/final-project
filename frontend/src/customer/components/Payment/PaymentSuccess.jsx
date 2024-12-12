@@ -29,12 +29,10 @@ const PaymentSuccess = () => {
   }, []);
 
   useEffect(() => {
-    if (paymentId) {
-      const data = { orderId, paymentId };
+    const data = { orderId, paymentId };
 
-      dispatch(getOrderById(orderId));
-      dispatch(updatePayment(data));
-    }
+    dispatch(getOrderById(orderId));
+    dispatch(updatePayment(data));
   }, [orderId, paymentId]);
 
   console.log('|| --- order');
@@ -50,7 +48,7 @@ const PaymentSuccess = () => {
       </div>
       <OrderTracker activeStep={1} />
       <Grid className="space-y-5 py-5 pt-20">
-        {order.order?.map((item) => (
+        {order.order?.orderItems.map((item) => (
           <Grid
             container
             className="shadow-xl rounded-md p-5"
