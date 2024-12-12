@@ -85,6 +85,8 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   public String deleteProduct(Long productId) throws ProductException {
+    
+    System.out.println("|| --- deleteProduct : " + productId);
 
     Product product = findProductById(productId);
 

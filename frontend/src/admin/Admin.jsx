@@ -71,23 +71,21 @@ const Admin = () => {
   );
 
   return (
-    <div>
-      <Box className="flex h-screen">
-        <CssBaseline />
-        <div className="w-[15%] border border-r-gray-300">
-          <DrawerNav />
-        </div>
-        <Box className="w-[85%]">
-          <Routes>
-            <Route path="/" element={<Dashboard />}></Route>
-            <Route path="/product/create" element={<CreateProductForm />}></Route>
-            <Route path="/products" element={<ProductsTable />}></Route>
-            <Route path="/orders" element={<OrdersTable />}></Route>
-            <Route path="/customers" element={<CustomersTable />}></Route>
-          </Routes>
-        </Box>
+    <Box className="flex h-screen">
+      <CssBaseline />
+      <div className="w-[15%] border border-r-gray-300 h-full fixed top-0">
+        <DrawerNav />
+      </div>
+      <Box className="w-[85%] h-full ml-[15%]">
+        <Routes>
+          <Route path="/" element={<Dashboard />}></Route>
+          <Route path="/product/create" element={<CreateProductForm />}></Route>
+          <Route path="/products" element={<ProductsTable />}></Route>
+          <Route path="/orders" element={<OrdersTable />}></Route>
+          <Route path="/customers" element={<CustomersTable />}></Route>
+        </Routes>
       </Box>
-    </div>
+    </Box>
   );
 };
 
