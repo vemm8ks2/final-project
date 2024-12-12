@@ -73,7 +73,7 @@ const Stats = () => (
 
 const MonthlyOverview = () => {
   return (
-    <Card sx={{ bgcolor: '#242B2E', color: 'white', height: '100%' }}>
+    <Card sx={{ height: '100%' }}>
       <CardHeader
         title="Monthly overview"
         action={

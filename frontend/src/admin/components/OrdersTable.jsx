@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -28,13 +29,11 @@ const OrdersTable = () => {
   const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = useState(null);
-  // @ts-ignore
   const { adminOrder } = useSelector((store) => store);
 
   const open = Boolean(anchorEl);
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(getOrders());
   }, [adminOrder.confirmed, adminOrder.shipped, adminOrder.delivered, adminOrder.deletedOrder]);
 
@@ -48,35 +47,32 @@ const OrdersTable = () => {
 
   const handleShippedOrder = (anchorEl) => {
     if (!anchorEl) return;
-    // @ts-ignore
+
     dispatch(shipOrder(getCurrentStatusId(anchorEl)));
     handleClose();
   };
 
   const handleConfirmedOrder = (anchorEl) => {
     if (!anchorEl) return;
-    // @ts-ignore
+
     dispatch(confirmOrder(getCurrentStatusId(anchorEl)));
     handleClose();
   };
 
   const handleDeliveredOrder = (anchorEl) => {
     if (!anchorEl) return;
-    // @ts-ignore
+
     dispatch(deliveredOrder(getCurrentStatusId(anchorEl)));
     handleClose();
   };
 
   const handleDeleteOrder = (orderId) => {
-    // @ts-ignore
     dispatch(deleteOrder(orderId));
   };
 
   const getCurrentStatusId = (anchorEl) => {
     return anchorEl.id.split('-')[2];
   };
-
-  console.log(anchorEl?.id);
 
   return (
     <div>

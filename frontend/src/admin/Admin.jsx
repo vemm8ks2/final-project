@@ -73,7 +73,7 @@ const Admin = () => {
   return (
     <Box className="flex h-screen">
       <CssBaseline />
-      <div className="w-[15%] border border-r-gray-300 h-full fixed top-0">
+      <div className="shadow-lg shadow-gray-600 w-[15%] h-full fixed top-0">
         <DrawerNav />
       </div>
       <Box className="w-[85%] h-full ml-[15%]">
