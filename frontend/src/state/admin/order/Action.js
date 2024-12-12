@@ -24,7 +24,7 @@ export const getOrders = (req) => async (dispatch) => {
   dispatch({ type: GET_ORDERS_REQUEST });
 
   try {
-    const { data } = await api.get('/api/admin/orders');
+    const { data } = await api.get('/api/admin/orders/');
     dispatch({ type: GET_ORDERS_SUCCESS, payload: data });
   } catch (e) {
     dispatch({ type: GET_ORDERS_FAILURE, payload: e.message });
@@ -79,7 +79,7 @@ export const deleteOrder = (orderId) => async (dispatch) => {
   dispatch({ type: DELETE_ORDER_REQUEST });
 
   try {
-    const { data } = await api.put(`/api/admin/orders/${orderId}/delete`);
+    const { data } = await api.delete(`/api/admin/orders/${orderId}/delete`);
     dispatch({ type: DELETE_ORDER_SUCCESS, payload: data });
   } catch (e) {
     dispatch({ type: DELETE_ORDER_FAILURE, payload: e.message });

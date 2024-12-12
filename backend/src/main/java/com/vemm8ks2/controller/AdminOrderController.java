@@ -35,7 +35,7 @@ public class AdminOrderController {
   }
 
   @PutMapping("/{orderId}/confirmed")
-  public ResponseEntity<Order> ConfirmedOrderHandler(@PathVariable Long orderId,
+  public ResponseEntity<Order> ConfirmedOrderHandler(@PathVariable("orderId") Long orderId,
       @RequestHeader("Authorization") String jwt) throws OrderException {
 
     Order order = orderService.confirmedOrder(orderId);
@@ -44,7 +44,7 @@ public class AdminOrderController {
   }
 
   @PutMapping("/{orderId}/ship")
-  public ResponseEntity<Order> ShippedOrderHandler(@PathVariable Long orderId,
+  public ResponseEntity<Order> ShippedOrderHandler(@PathVariable("orderId") Long orderId,
       @RequestHeader("Authorization") String jwt) throws OrderException {
 
     Order order = orderService.shippedOrder(orderId);
@@ -53,7 +53,7 @@ public class AdminOrderController {
   }
 
   @PutMapping("/{orderId}/deliver")
-  public ResponseEntity<Order> DeliverOrderhandler(@PathVariable Long orderId,
+  public ResponseEntity<Order> DeliverOrderhandler(@PathVariable("orderId") Long orderId,
       @RequestHeader("Authorization") String jwt) throws OrderException {
 
     Order order = orderService.deliveredOrder(orderId);
@@ -62,7 +62,7 @@ public class AdminOrderController {
   }
 
   @PutMapping("/{orderId}/cancel")
-  public ResponseEntity<Order> CancelOrderHandler(@PathVariable Long orderId,
+  public ResponseEntity<Order> CancelOrderHandler(@PathVariable("orderId") Long orderId,
       @RequestHeader("Authorization") String jwt) throws OrderException {
 
     Order order = orderService.cancledOrder(orderId);
@@ -71,7 +71,7 @@ public class AdminOrderController {
   }
 
   @DeleteMapping("/{orderId}/delete")
-  public ResponseEntity<ApiResponse> DeleteOrderHandler(@PathVariable Long orderId,
+  public ResponseEntity<ApiResponse> DeleteOrderHandler(@PathVariable("orderId") Long orderId,
       @RequestHeader("Authorization") String jwt) throws OrderException {
 
     orderService.deleteOrder(orderId);
